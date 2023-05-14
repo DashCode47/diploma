@@ -7,6 +7,7 @@ const userEndpoints = {
     `courses/subjects/${subjectId}/assistances?userId=${id}`,
   addAssistance: ({ subjectId }) =>
     `/courses/${subjectId}/assistances/increaseListAssistanceNum`,
+  getUserSubjects: ({ userId }) => `courses/user/${userId}`,
 };
 
 const subjectApi = {
@@ -23,6 +24,17 @@ const subjectApi = {
   getSubjects: async () => {
     try {
       const response = await publicClient.get(userEndpoints.getSubjects);
+      return { response };
+    } catch (err) {
+      return { err };
+    }
+  },
+
+  getUserSubjects: async (userId) => {
+    try {
+      const response = await publicClient.get(
+        userEndpoints.getUserSubjects({ userId })
+      );
       return { response };
     } catch (err) {
       return { err };

@@ -3,16 +3,40 @@ import { Doughnut } from "react-chartjs-2";
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 import { Box } from "@mui/material";
 import userApi from "../../api/modules/users.api";
+import subjectApi from "../../api/modules/subjects.api";
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
 const PointsChart = () => {
   const [subjects, setSubjects] = useState([]);
+  const [points, setPoints] = useState();
   const userId = localStorage.getItem("userId");
   const fetchSubjects = async () => {
-    const { response, err } = await userApi.getSubects(userId);
+    const { response, err } = await subjectApi.getUserSubjects(userId);
     if (response) {
       setSubjects(response.map((item) => item.name));
+      setPoints(
+        response
+          .filter((subject) =>
+            subject.assistances.some((assistance) => assistance.user.id === 2)
+          )
+          .map(
+            (subject) =>
+              subject.assistances.find((assistance) => assistance.user.id === 2)
+                .assistanceNum
+          )
+      );
+      console.log(
+        response
+          .filter((subject) =>
+            subject.assistances.some((assistance) => assistance.user.id === 2)
+          )
+          .map(
+            (subject) =>
+              subject.assistances.find((assistance) => assistance.user.id === 2)
+                .assistanceNum
+          )
+      );
       console.log(response);
     } else
       console.log({
@@ -31,7 +55,7 @@ const PointsChart = () => {
         options: {
           maintainAspectRatio: false,
         },
-        data: [12, 19, 3, 5, 2, 3],
+        data: points,
         backgroundColor: [
           "rgba(255, 99, 132, 0.2)",
           "rgba(54, 162, 235, 0.2)",

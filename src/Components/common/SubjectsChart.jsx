@@ -1,29 +1,60 @@
-import { Grid, Typography, Box } from "@mui/material";
+import { Grid, Typography, Box, Button } from "@mui/material";
 import { Stack } from "@mui/system";
-import React from "react";
-
+import React, { useEffect, useState } from "react";
+import userApi from "../../api/modules/users.api";
+import subjectApi from "../../api/modules/subjects.api";
+import { useNavigate } from "react-router-dom";
 const SubjectsChart = () => {
+  const [subjects, setSubjects] = useState([]);
+  const navigate = useNavigate();
   const courses = ["UX Design", "UI class", "Bases de Datos"];
+  const userId = localStorage.getItem("userId");
+
+  const fetchSubjects = async () => {
+    const { response, err } = await subjectApi.getUserSubjects(userId);
+    if (response) {
+      setSubjects(response.map((item) => item.name));
+      console.log(response);
+    } else
+      console.log({
+        err,
+      });
+  };
+  useEffect(() => {
+    fetchSubjects();
+  }, []);
+
   return (
     <Grid
       container
       spacing={1}
       direction={"column"}
-      sx={{ backgroundColor: "white", borderRadius: 5, height: "100%" }}
+      sx={{ backgroundColor: "white", borderRadius: 5 }}
     >
       <Grid item md={2}>
         <Stack
           direction={"row"}
-          sx={{ flex: 1, justifyContent: "space-between" }}
+          sx={{
+            flex: 1,
+            justifyContent: "space-between",
+            alignItems: "center",
+          }}
           px={3}
         >
-          <Typography sx={{ color: "blue", fontWeight: "bold" }}>
-            Ongoing Courses
-          </Typography>
+          <Box>
+            <Typography sx={{ color: "blue", fontWeight: "bold" }}>
+              Ongoing Courses
+            </Typography>
+          </Box>
 
-          <Typography sx={{ color: "blue", fontWeight: "bold" }}>
-            More
-          </Typography>
+          <Box>
+            <Button
+              onClick={() => navigate("/Classes")}
+              sx={{ color: "blue", fontWeight: "bold" }}
+            >
+              More
+            </Button>
+          </Box>
         </Stack>
       </Grid>
 
@@ -42,7 +73,7 @@ const SubjectsChart = () => {
           paddingY: 3,
         }}
       >
-        {courses.map((item, index) => (
+        {subjects.map((item, index) => (
           <Stack
             key={index}
             direction={"row"}

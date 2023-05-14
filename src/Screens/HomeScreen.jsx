@@ -62,6 +62,7 @@ const HomeScreen = () => {
             </Modal>
             {/* <Schedule /> */}
           </Grid>
+          {/* On going */}
           <Grid item md={5}>
             <SubjectsChart />
           </Grid>
