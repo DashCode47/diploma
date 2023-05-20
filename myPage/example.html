@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Mi página web</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background: linear-gradient(to right, #00d9ff, #0000ff);
+        background-image: url("back1.jpg");
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
+        margin: 0;
+      }
+
+      h1 {
+        color: #333;
+        text-decoration: underline;
+      }
+
+      table {
+        border-collapse: collapse;
+        width: 100%;
+      }
+
+      img {
+        max-width: 100%;
+        height: auto;
+        margin-bottom: 10px;
+      }
+
+      p {
+        line-height: 1.5;
+      }
+      .ec {
+        background: linear-gradient(to right, yellow, blue, red);
+        margin-top: 0;
+        padding: 15px;
+      }
+      .containerB {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+      }
+      .title {
+        width: 50%;
+      }
+      .buttons {
+        margin-top: 160px;
+      }
+      .button {
+        display: inline-block;
+        padding: 10px 20px;
+        border-radius: 20px;
+        border: none;
+        background-color: #007bff;
+        color: #fff;
+        font-weight: bold;
+        text-decoration: none;
+        cursor: pointer;
+        border: #333 solid 1px;
+      }
+      .container {
+        padding-left: 20px;
+        display: flex;
+        flex: 1;
+        flex-direction: column;
+        justify-content: space-around;
+        align-items: center;
+      }
+      h1.ec {
+        font-size: 36px;
+        text-align: center;
+        color: white;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        padding: 20px;
+        margin-top: 0;
+      }
+
+      .button {
+        /* existing styles */
+        transition: background-color 0.3s ease;
+      }
+
+      .button:hover {
+        background-color: #0056b3;
+      }
+      .containerB {
+        /* existing styles */
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+      }
+
+      .title {
+        width: 80%;
+        max-width: 600px;
+        margin-bottom: 20px;
+      }
+
+      .buttons {
+        margin-top: 40px;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Página 1 -->
+    <h1 class="ec">Ecuador</h1>
+    <div class="container">
+      <div class="containerB">
+        <h4 class="title">
+          Мы маленькая страна с самым высоким вулканом, биоразнообразные
+          джунгли, самые красивые острова и самое большое сердце.
+        </h4>
+        <img src="logo2.png" alt="Imagen 1" style="height: 180px" />
+      </div>
+      <div class="buttons">
+        <a href="pagina2.html"
+          ><button class="button">Туристические места</button></a
+        >
+        <a href="pagina3.html"><button class="button">Kультура</button></a>
+        <a href="pagina2.html"><button class="button">Гастрономия</button></a>
+      </div>
+    </div>
+  </body>
+</html>

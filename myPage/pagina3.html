@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Image Grid</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+    />
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f5f5f5;
+        background-size: contain;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin: 0;
+        padding-bottom: 25px;
+        padding: 40px;
+      }
+      p {
+        color: black;
+      }
+      .item-description {
+        font-size: 18px;
+        margin-top: 10px;
+        background: linear-gradient(to right, #dbe4e6d7, #77cfcb);
+        padding: 10px;
+        border-radius: 20px;
+        border: #333 solid 1px;
+      }
+      .home-button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 10px;
+        border: none;
+        background-color: #007bff;
+        color: #fff;
+        font-weight: bold;
+        text-decoration: none;
+        cursor: pointer;
+        border-radius: 5px;
+      }
+      .home-icon {
+        margin-right: 5px;
+      }
+      .image-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        grid-gap: 20px;
+      }
+      .image-grid-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        padding-bottom: 15px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      }
+      .image-grid-item img {
+        max-width: 100%;
+        height: auto;
+      }
+      .image-description {
+        margin-top: 10px;
+        font-size: 18px;
+      }
+      .button {
+        padding: 10px 20px;
+        border-radius: 20px;
+        border: none;
+        background-color: #007bff;
+        color: #fff;
+        font-weight: bold;
+        text-decoration: none;
+        cursor: pointer;
+        border: #333 solid 1px;
+      }
+      h1.title {
+        font-size: 24px;
+        font-weight: bold;
+        margin-top: 15px;
+      }
+      .button:hover,
+      .home-button:hover {
+        background-color: #0056b3; /* dark blue */
+      }
+      .image-grid-item:hover {
+        transform: translateY(-5px);
+      }
+      a {
+        color: #007bff; /* blue link color */
+        text-decoration: none;
+      }
+
+      a:hover {
+        text-decoration: underline;
+      }
+      .item-description {
+        font-size: 16px;
+      }
+      footer {
+        padding: 20px;
+        background-color: #f5f5f5; /* light gray background color */
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="image-grid">
+      <div class="image-grid-item">
+        <h1 class="title">"Дьяблада де Пилларо":</h1>
+        <img src="pillaro.jpg" alt="Image 1" />
+        <p class="item-description">
+          Фестиваль «Диаблада» проводится каждый год в «Пилларо», провинция
+          «Тунгурауа», с 1 по 6 января. Этот родовой праздник выражается в танце
+          всех общин кантона, которые по кругу показывают свой ритм и в их руках
+          никогда не бывает недостатка в кукле, бутылке ликера и носовом платке.
+        </p>
+        <a href="https://www.youtube.com/watch?v=A3BILkot8k0" target="_blank"
+          >https://www.youtube.com/watch?v=A3BILkot8k0</a
+        >
+      </div>
+      <div class="image-grid-item">
+        <h1 class="title">Карнавал в Гуаранде:</h1>
+        <img src="guaranda.jpg" alt="Image 2" />
+        <p class="item-description">
+          Comparsas, цвета и радость — вот что вы найдете на одном из самых
+          популярных фестивалей в Эквадоре: карнавале Гуаранда. Этот религиозный
+          праздник обычно отмечается в феврале месяце и позволяет людям
+          поделиться своей радостью и гостеприимством с местными жителями среди
+          танцев, смеха и игр, которые заставляют их забыть о времени.
+        </p>
+        <a href="https://www.youtube.com/watch?v=Tdu1DazUEkQ" target="_blank"
+          >https://www.youtube.com/watch?v=Tdu1DazUEkQ</a
+        >
+      </div>
+      <div class="image-grid-item">
+        <h1 class="title">Чонта Амазонки:</h1>
+        <img src="chonta.jpg" alt="Image 3" />
+        <p class="item-description">
+          Популярный фестиваль, который напоминает нам о восстановлении после
+          несчастного случая: показан случай укуса змеи, рана, которая может
+          привести к увишину (мудрой целительнице или старухе), которая может
+          использовать перец чили и лекарственные травы для мытья рана . Он
+          отмечается в мае месяце, во время наибольшего производства чонты,
+          амазонского фрукта.
+        </p>
+        <a href="https://www.youtube.com/watch?v=G08OCpG3fF8" target="_blank"
+          >https://www.youtube.com/watch?v=G08OCpG3fF8</a
+        >
+      </div>
+      <div class="image-grid-item">
+        <h1 class="title">«Ла Мама Негра в Латакунге»:</h1>
+        <img src="mamanegra.jpg" alt="Image 4" />
+        <p class="item-description">
+          Именно в Латакунге, провинция Котопакси, «Черная мама», известная как
+          «Святейшая трагедия», демонстрирует коренные, испанские и африканские
+          культуры Эквадора. Сначала он проводится в сентябре как фестиваль
+          преданных, а второй раз проводится в первую неделю ноября, после
+          годовщины независимости Латакунги или политического фестиваля. Сначала
+          он проводится в сентябре как фестиваль преданных, а второй раз
+          проводится в первую неделю ноября, после годовщины независимости
+          Латакунги или политического фестиваля.
+        </p>
+        <a href="https://www.youtube.com/watch?v=GKz0kSjAi0w" target="_blank"
+          >https://www.youtube.com/watch?v=GKz0kSjAi0w</a
+        >
+      </div>
+      <div class="image-grid-item">
+        <h1 class="title">"Прибрежное родео Монтубио":</h1>
+        <img src="rodeo.jpg" alt="Image 4" />
+        <p class="item-description">
+          Именно в провинции Эль-Оро, в таких городах, как Пимоча и Винсес, или
+          в окрестностях Бальсара, провинция Гуаяс, вы можете найти родео
+          монтубио. Этот родовой праздник враждебно поглощает в кке, бтыле
+          ликера и носовом патке. Родео монтубио приходится на Дня
+          межкультурного и многонационального общения 12 октября.
+        </p>
+        <a href="https://www.youtube.com/watch?v=dtGxSE8IWvc" target="_blank"
+          >https://www.youtube.com/watch?v=dtGxSE8IWvc</a
+        >
+      </div>
+      <div class="image-grid-item">
+        <h1 class="title">“Фестиваль маниоки в Сараяку”:</h1>
+        <img src="pastasa.jpg" alt="Image 4" />
+        <p class="item-description">
+          В провинции Пастаса, в эквадорской Амазонии, готовят пиво из юкки и
+          для этого устраивают вечеринку. Женщины этнической группы Сараяку
+          собирают маниоку в саду, а мужчины отправляются на охоту. Женщина
+          варит маниоку до тех пор, пока ее можно будет жевать. Затем все
+          собираются вместе и начинают жевать маниоку под звуки барабана, что
+          сигнализирует о начале вечеринки, которая сближает общину, чтобы
+          отпраздновать ритуал, который проходит в феврале.
+        </p>
+        <a href="https://www.youtube.com/watch?v=09pQZEf9OOY" target="_blank"
+          >https://www.youtube.com/watch?v=09pQZEf9OOY</a
+        >
+      </div>
+    </div>
+
+    <div>
+      <a href="example.html" class="home-button">
+        <i class="fas fa-home home-icon"></i> Home
+      </a>
+      <a href="pagina2.html"
+        ><button class="button">Туристические места</button></a
+      >
+      <a href="pagina3.html"><button class="button">Kультура</button></a>
+      <a href="pagina2.html"><button class="button">Гастрономия</button></a>
+    </div>
+  </body>
+</html>

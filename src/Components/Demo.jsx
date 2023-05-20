@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useState } from "react";
 import Paper from "@mui/material/Paper";
 import {
   ViewState,
@@ -65,92 +65,83 @@ const owners = [
 
 const locations = [{ text: "Room 1", id: 1 }];
 
-export default class Demo extends React.PureComponent {
-  constructor(props) {
-    super(props);
-    this.state = {
-      data: appointments,
-      resources: [
-        {
-          fieldName: "members",
-          title: "Members",
-          instances: owners,
-          allowMultiple: true,
-        },
-        {
-          fieldName: "roomId",
-          title: "Location",
-          instances: locations,
-        },
-      ],
-      grouping: [
-        {
-          resourceName: "roomId",
-        },
-        {
-          resourceName: "members",
-        },
-      ],
-    };
+const Demo = () => {
+  const [data, setData] = useState(appointments);
+  const [resources, setResources] = useState([
+    {
+      fieldName: "members",
+      title: "Members",
+      instances: owners,
+      allowMultiple: true,
+    },
+    {
+      fieldName: "roomId",
+      title: "Location",
+      instances: locations,
+    },
+  ]);
+  const [grouping, setGrouping] = useState([
+    {
+      resourceName: "roomId",
+    },
+    {
+      resourceName: "members",
+    },
+  ]);
 
-    this.commitChanges = this.commitChanges.bind(this);
-  }
-
-  commitChanges({ added, changed, deleted }) {
-    this.setState((state) => {
-      let { data } = state;
+  const commitChanges = ({ added, changed, deleted }) => {
+    setData((prevData) => {
+      let newData = [...prevData];
       if (added) {
         const startingAddedId =
-          data.length > 0 ? data[data.length - 1].id + 1 : 0;
-        data = [...data, { id: startingAddedId, ...added }];
+          newData.length > 0 ? newData[newData.length - 1].id + 1 : 0;
+        newData = [...newData, { id: startingAddedId, ...added }];
       }
       if (changed) {
-        data = data.map((appointment) =>
+        newData = newData.map((appointment) =>
           changed[appointment.id]
             ? { ...appointment, ...changed[appointment.id] }
             : appointment
         );
       }
       if (deleted !== undefined) {
-        data = data.filter((appointment) => appointment.id !== deleted);
+        newData = newData.filter((appointment) => appointment.id !== deleted);
       }
-      return { data };
+      return newData;
     });
-  }
+    console.log(data);
+  };
 
-  render() {
-    const { data, resources, grouping } = this.state;
+  return (
+    <Paper>
+      <Scheduler data={data} height={550}>
+        <ViewState defaultCurrentDate="2017-05-28" />
+        <EditingState onCommitChanges={commitChanges} />
+        <GroupingState
+          grouping={grouping}
+          groupOrientation={() => "Horizontal"}
+        />
 
-    return (
-      <Paper>
-        <Scheduler data={data} height={550}>
-          <ViewState defaultCurrentDate="2017-05-28" />
-          <EditingState onCommitChanges={this.commitChanges} />
-          <GroupingState
-            grouping={grouping}
-            groupOrientation={() => "Horizontal"}
-          />
+        <WeekView
+          startDayHour={9}
+          endDayHour={17}
+          excludedDays={[0, 6]}
+          cellDuration={60}
+          name="Vertical Orientation"
+        />
+        {/* <DayView startDayHour={9} endDayHour={15} intervalCount={2} /> */}
+        <Appointments />
+        <Resources data={resources} mainResourceName="members" />
 
-          <WeekView
-            startDayHour={9}
-            endDayHour={17}
-            excludedDays={[0, 6]}
-            cellDuration={60}
-            name="Vertical Orientation"
-          />
-          {/* <DayView startDayHour={9} endDayHour={15} intervalCount={2} /> */}
-          <Appointments />
-          <Resources data={resources} mainResourceName="members" />
+        <IntegratedGrouping />
+        <IntegratedEditing />
 
-          <IntegratedGrouping />
-          <IntegratedEditing />
-
-          <AppointmentTooltip showOpenButton />
-          <AppointmentForm />
-          <GroupingPanel />
-          <DragDropProvider />
-        </Scheduler>
-      </Paper>
-    );
-  }
-}
+        <AppointmentTooltip showOpenButton />
+        <AppointmentForm />
+        <GroupingPanel />
+        <DragDropProvider />
+      </Scheduler>
+    </Paper>
+  );
+};
+export default Demo;

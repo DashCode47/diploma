@@ -11,6 +11,7 @@ const PointsChart = () => {
   const [subjects, setSubjects] = useState([]);
   const [points, setPoints] = useState();
   const userId = localStorage.getItem("userId");
+
   const fetchSubjects = async () => {
     const { response, err } = await subjectApi.getUserSubjects(userId);
     if (response) {
@@ -18,26 +19,17 @@ const PointsChart = () => {
       setPoints(
         response
           .filter((subject) =>
-            subject.assistances.some((assistance) => assistance.user.id === 2)
+            subject.assistances.some(
+              (assistance) => assistance.user.id == userId
+            )
           )
           .map(
             (subject) =>
-              subject.assistances.find((assistance) => assistance.user.id === 2)
-                .assistanceNum
+              subject.assistances.find(
+                (assistance) => assistance.user.id == userId
+              ).assistanceNum
           )
       );
-      console.log(
-        response
-          .filter((subject) =>
-            subject.assistances.some((assistance) => assistance.user.id === 2)
-          )
-          .map(
-            (subject) =>
-              subject.assistances.find((assistance) => assistance.user.id === 2)
-                .assistanceNum
-          )
-      );
-      console.log(response);
     } else
       console.log({
         err,

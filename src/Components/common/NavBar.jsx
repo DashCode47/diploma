@@ -19,6 +19,11 @@ import ListItemText from "@mui/material/ListItemText";
 import InboxIcon from "@mui/icons-material/MoveToInbox";
 import MailIcon from "@mui/icons-material/Mail";
 import { useNavigate } from "react-router-dom";
+import { Stack } from "@mui/material";
+import HomeIcon from "@mui/icons-material/Home";
+import SchoolIcon from "@mui/icons-material/School";
+import SettingsIcon from "@mui/icons-material/Settings";
+import LogoutIcon from "@mui/icons-material/Logout";
 
 const drawerWidth = 240;
 
@@ -92,6 +97,19 @@ export default function NavBar() {
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
   const navigate = useNavigate();
+  const [items, setItems] = React.useState([
+    "HomeScreen",
+    "Classes",
+    "Profile",
+    "Logout",
+  ]);
+
+  const [icons, setIcons] = React.useState([
+    "HomeIcon",
+    "SchoolIcon",
+    "SettingsIcon",
+    "LogoutIcon",
+  ]);
 
   const goTo = (text) => {
     navigate(`/${text}`);
@@ -103,6 +121,45 @@ export default function NavBar() {
 
   const handleDrawerClose = () => {
     setOpen(false);
+  };
+  const iconComponents = {
+    HomeIcon,
+    SchoolIcon,
+    SettingsIcon,
+    LogoutIcon,
+  };
+
+  const renderPages = () => {
+    return items.map((text, index) => (
+      <ListItem
+        key={text}
+        disablePadding
+        sx={{ display: "block" }}
+        onClick={() => goTo(text)}
+      >
+        <ListItemButton
+          sx={{
+            minHeight: 48,
+            justifyContent: open ? "initial" : "center",
+            px: 2.5,
+          }}
+        >
+          <ListItemIcon
+            sx={{
+              minWidth: 0,
+              mr: open ? 3 : "auto",
+              justifyContent: "center",
+            }}
+          >
+            {icons.map((icon, indexB) => {
+              const IconComponent = iconComponents[icon];
+              return index === indexB ? <IconComponent /> : null;
+            })}
+          </ListItemIcon>
+          <ListItemText primary={text} sx={{ opacity: open ? 1 : 0 }} />
+        </ListItemButton>
+      </ListItem>
+    ));
   };
 
   return (
@@ -128,7 +185,24 @@ export default function NavBar() {
         </Toolbar>
       </AppBar>
       <Drawer variant="permanent" open={open}>
-        <DrawerHeader>
+        <DrawerHeader
+          sx={{
+            justifyContent: "space-between",
+            alignItems: "center",
+            paddingLeft: 3,
+          }}
+        >
+          <Stack
+            direction={"row"}
+            alignItems={"center"}
+            justifyContent={"center"}
+          >
+            <img src={require("../../Assets/logoDraw.png")} height={50} />
+            <Typography component={"h4"} variant="h6" sx={{ paddingLeft: 3 }}>
+              КФУ
+            </Typography>
+          </Stack>
+
           <IconButton onClick={handleDrawerClose}>
             {theme.direction === "rtl" ? (
               <ChevronRightIcon />
@@ -138,36 +212,7 @@ export default function NavBar() {
           </IconButton>
         </DrawerHeader>
         <Divider />
-        <List>
-          {["HomeScreen", "Classes", "Settings", "Logout", "DetailClass"].map(
-            (text, index) => (
-              <ListItem key={text} disablePadding sx={{ display: "block" }}>
-                <ListItemButton
-                  sx={{
-                    minHeight: 48,
-                    justifyContent: open ? "initial" : "center",
-                    px: 2.5,
-                  }}
-                >
-                  <ListItemIcon
-                    sx={{
-                      minWidth: 0,
-                      mr: open ? 3 : "auto",
-                      justifyContent: "center",
-                    }}
-                  >
-                    {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                  </ListItemIcon>
-                  <ListItemText
-                    primary={text}
-                    sx={{ opacity: open ? 1 : 0 }}
-                    onClick={() => goTo(text)}
-                  />
-                </ListItemButton>
-              </ListItem>
-            )
-          )}
-        </List>
+        <List>{renderPages()}</List>
         <Divider />
       </Drawer>
     </Box>

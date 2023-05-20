@@ -48,7 +48,7 @@ export default function SignInScrenn() {
     };
     const { response, err } = await userApi.signin(data);
     if (response) {
-      console.log(response.token);
+      console.log("response token", response.token);
       localStorage.setItem("accessToken", response.token);
       localStorage.setItem("userId", response.id);
       navigate("/HomeScreen");

@@ -7,7 +7,6 @@ import { useNavigate } from "react-router-dom";
 const SubjectsChart = () => {
   const [subjects, setSubjects] = useState([]);
   const navigate = useNavigate();
-  const courses = ["UX Design", "UI class", "Bases de Datos"];
   const userId = localStorage.getItem("userId");
 
   const fetchSubjects = async () => {

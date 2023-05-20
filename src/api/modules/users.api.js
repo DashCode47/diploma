@@ -4,11 +4,23 @@ const userEndpoints = {
   signin: "auth/authenticate",
   signup: "auth/signup",
   logout: "auth/logout",
+  getUser: ({ userId }) => `auth//users/${userId}`,
   addSubjectB: ({ userId }) => `auth/subjects/${userId}`,
   getSubects: ({ userId }) => `auth/subjects/${userId}`,
 };
 
 const userApi = {
+  getUser: async (userId) => {
+    try {
+      const response = await publicClient.get(
+        userEndpoints.getUser({ userId })
+      );
+      return { response };
+    } catch (err) {
+      return err;
+    }
+  },
+
   signin: async (data) => {
     try {
       console.log("send request");

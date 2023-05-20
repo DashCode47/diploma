@@ -29,7 +29,7 @@ const MyClasses = () => {
   const handleClose = () => setOpen(false);
   const handleCloseJoin = () => setOpenJoin(false);
   const [data, setData] = useState([]);
-
+  const userId = localStorage.getItem("userId");
   const onSucces = () => {
     toast.success("subject added", {
       position: "bottom-left",
@@ -38,7 +38,7 @@ const MyClasses = () => {
 
   useEffect(() => {
     const getList = async () => {
-      const { response, err } = await subjectApi.getSubjects();
+      const { response, err } = await subjectApi.getUserSubjects(userId);
       if (response) {
         console.log(response);
         setData(response);

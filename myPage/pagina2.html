@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Mi página web</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+    />
+    <style>
+            body {
+              font-family: Arial, sans-serif;
+              margin: 40px;
+              background: linear-gradient(to right, #00d9ff, #0000ff);
+              background-image: url("back5.jpg");
+              background-size: cover;
+              background-repeat: no-repeat;
+              display: flex;
+              flex-direction: column;
+              justify-content: center;
+              align-items: center;
+            }
+
+            h1 {
+              color: #333;
+              text-decoration: underline;
+            }
+
+
+            img {
+              max-width: 100%;
+              height: auto;
+              margin-bottom: 10px;
+            }
+
+            p {
+              line-height: 1.5;
+            }
+
+            .home-button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 10px;
+        border: none;
+        background-color: #007bff;
+        color: #fff;
+        font-weight: bold;
+        text-decoration: none;
+        cursor: pointer;
+        border-radius: 5px;
+      }
+      .home-icon {
+        margin-right: 5px;
+      }
+            .container {
+              display: flex;
+              justify-content: space-between;
+              align-items: center;
+            }
+            .title {
+              width: 50%;
+              background: linear-gradient(to right, #dbe4e6d7, #77cfcb);
+              padding: 10px;
+              border-radius: 20px;
+              border: #333 solid 1px;
+            }
+            .subtitle {
+              background: linear-gradient(to right, #dbe4e6d7, #77cfcb);
+              padding: 10px;
+              border-radius: 20px;
+              border: #333 solid 1px;
+            }
+            .button {
+
+              padding: 10px 20px;
+              border-radius: 20px;
+              border: none;
+              background-color: #007bff;
+              color: #fff;
+              font-weight: bold;
+              text-decoration: none;
+              cursor: pointer;
+              border: #333 solid 1px;
+            }
+            .montanita {
+              color: black;
+            }
+
+            .carousel-container {
+            max-width: 600px;
+            margin: 0 auto;
+            position: relative;
+            display: flex;
+
+          }
+          .carousel-item {
+            display: none;
+          }
+          .carousel-item.active {
+            display: block;
+            display: flex;
+            flex: 1;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+
+          }
+          .carousel-image {
+            width: 90%;
+            height: auto;
+            height: 300px;
+          }
+          .cont-img{
+            width: 610px;
+            background-color: red;
+            display: flex;
+            justify-content: center;
+          }
+
+          .carousel-description {
+            font-size: 18px;
+            margin-top: 10px;
+            background: linear-gradient(to right, #dbe4e6d7, #77cfcb);
+              padding: 10px;
+              border-radius: 20px;
+              border: #333 solid 1px;
+          }
+          .carousel-arrow {
+            position: absolute;
+            top: 25%;
+            transform: translateY(-50%);
+            background-color: rgba(0, 0, 0, 0.5);
+            color: #fff;
+            padding: 10px;
+            cursor: pointer;
+          }
+          .carousel-arrow.left {
+            left: 0px;
+          }
+          .carousel-arrow.right {
+            right: 0px;
+          }
+        </style
+    </style>
+  </head>
+  <body>
+    <div class="carousel-container">
+      <div class="carousel-item active">
+        <h1 class="montanita">Монтаньита:</h1>
+
+        <img class="carousel-image" src="montanita.jpg" alt="Image 1" />
+
+        <p class="carousel-description">
+          Место, которое также привлекает своим живописным городом, где
+          деревенские здания из тростника и соломы перемешаны с гостиницами,
+          бесконечными барами, неформальными ресторанами, ремесленными ярмарками
+          и магазинами для серфинга, среди пешеходных улиц, где музыка регги
+          является постоянной рядом с вымпелами с символами. мира.
+        </p>
+      </div>
+      <div class="carousel-item">
+        <h1 class="montanita">Баньёс де Агуа Санта:</h1>
+        <img class="carousel-image" src="banos.jpg" alt="Image 1" />
+        <p class="carousel-description">
+          Город, известный своими источниками и горячими источниками, которые
+          бьют при высокой температуре из почвы вулкана Тунгурауа, водами,
+          пропитанными минералами, температура которых колеблется от 18ºC до
+          55ºC, с которыми с первобытных времен ассоциировались чудесные
+          исцеления. Еще одной его достопримечательностью являются различные
+          альтернативы приключенческого туризма, которые позволяют ее природные
+          ландшафты, такие как: поход по маршруту 60 водопадов, пересечение рек
+          в Тарабите, рафтинг по ее могучей реке Пастаса и различные сценарии
+          для скалолазания, прыжок с моста, каньонинг и каякинг.
+        </p>
+      </div>
+      <div class="carousel-item">
+        <h1 class="montanita">Вулкан и Лагуна Килотоа:</h1>
+        <img class="carousel-image" src="quilotoa.jpg" alt="Image 1" />
+        <p class="carousel-description">
+          Эффектный природный амфитеатр, расположенный в кратере вулкана
+          Килотоа, в центре которого, диаметром 3 километра, образовалась лагуна
+          сине-зеленых тонов. Зрелище сверху представляет собой впечатляющую
+          природную смотровую площадку, позволяющую оценить величие пейзажа, а
+          снизу, спустившись на 280 метров, можно увидеть неправильные пузыри,
+          выходящие из фумарол вулкана. Для восхождения вы должны добраться до
+          города Зумбахуа, откуда вы можете добраться до общины Килотоа на
+          автобусе, путешествуя по извилистым тропам Андских гор по маршруту,
+          известному как «Вершина».
+        </p>
+      </div>
+      <div class="carousel-item">
+        <h1 class="montanita">Поезд «Ла Нарис дел Дьявлo»::</h1>
+        <img class="carousel-image" src="nariz.jpg" alt="Image 1" />
+        <p class="carousel-description">
+          Путешествие на поезде, пересекающее ландшафты Анд, соединяющее города
+          Алауси и Сибамбе зигзагообразными дорогами, составляющими один из
+          самых сложных маршрутов в мире. Его высшую точку образует холм по
+          прозвищу Чертов нос, место, где железнодорожные пути спускаются на 80
+          метров практически вертикально благодаря впечатляющим инженерным
+          работам.
+        </p>
+      </div>
+
+      <div class="carousel-item">
+        <h1 class="montanita">Галапагосские острова:</h1>
+        <img class="carousel-image" src="galapagos.jpg" alt="Image 1" />
+        <p class="carousel-description">
+          Чуть менее чем в тысяче километров от побережья американского
+          континента расположены Галапагосские острова, группа из тринадцати
+          островов вулканического происхождения и более ста островков и
+          скалистых выходов, удивительный заповедник биологического
+          разнообразия, где обитает почти две тысячи видов. сосуществуют
+          эндемики, в том числе знаменитые гигантские наземные черепахи,
+          очаровавшие Дарвина. Объявленный ЮНЕСКО объектом Всемирного наследия,
+          архипелаг почти полностью представляет собой национальный парк с
+          небольшими районами населенных пунктов, таких как Пуэрто-Вильямиль и
+          Пуэрто-Айрора, откуда отправляются экспедиции на остальные острова.
+        </p>
+      </div>
+
+      <div class="carousel-arrow left" onclick="previousSlide()">&lt;</div>
+      <div class="carousel-arrow right" onclick="nextSlide()">&gt;</div>
+    </div>
+    <div>
+      <a href="example.html" class="home-button">
+        <i class="fas fa-home home-icon"></i> Home
+      </a>
+      <a href="pagina2.html"
+        ><button class="button">Туристические места</button></a
+      >
+      <a href="pagina3.html"><button class="button">Kультура</button></a>
+      <a href="pagina2.html"><button class="button">Гастрономия</button></a>
+    </div>
+
+    <script>
+      const carouselItems = document.querySelectorAll(".carousel-item");
+      let currentIndex = 0;
+
+      function showSlide(index) {
+        carouselItems.forEach((item) => item.classList.remove("active"));
+        carouselItems[index].classList.add("active");
+      }
+
+      function nextSlide() {
+        currentIndex = (currentIndex + 1) % carouselItems.length;
+        showSlide(currentIndex);
+      }
+
+      function previousSlide() {
+        currentIndex =
+          (currentIndex - 1 + carouselItems.length) % carouselItems.length;
+        showSlide(currentIndex);
+      }
+
+      /* setInterval(nextSlide, 3000); // Change slide every 3 seconds */
+    </script>
+  </body>
+</html>

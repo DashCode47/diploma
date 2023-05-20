@@ -50,7 +50,7 @@ export default function SignUpScreen() {
     };
     const { response, err } = await userApi.signup(data);
     if (response) {
-      console.log(response);
+      console.log("logged in response ", response);
       navigate("/");
     } else
       toast.error(err.message, {

@@ -14,6 +14,7 @@ import LogOutScreen from "./Screens/LogOutScreen";
 
 import "react-toastify/dist/ReactToastify.css";
 import DetailClass from "./Screens/privateRoutes/DetailClass";
+import ProfileScreen from "./Screens/ProfileScreen";
 
 function App() {
   /* const [token, setToken] = useState(false); */
@@ -63,6 +64,16 @@ function App() {
         />
 
         <Route path="/Classes" element={<MyClasses />} />
+
+        <Route
+          path="/Profile"
+          element={
+            <PrivateRoute
+              component={ProfileScreen}
+              isAuthenticated={tokenStorage}
+            />
+          }
+        />
 
         <Route
           path="/Logout"

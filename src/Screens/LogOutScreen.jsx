@@ -1,6 +1,7 @@
 import React from "react";
 import { Button, Container } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import NavBar from "../Components/common/NavBar";
 
 const LogOutScreen = () => {
   const navigate = useNavigate();
@@ -15,7 +16,8 @@ const LogOutScreen = () => {
   };
 
   return (
-    <Container>
+    <Container sx={{ marginTop: 15 }}>
+      <NavBar />
       <Button variant="contained" onClick={() => handleOut()}>
         Log Out
       </Button>
