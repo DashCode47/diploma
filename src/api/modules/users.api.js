@@ -7,6 +7,7 @@ const userEndpoints = {
   getUser: ({ userId }) => `auth//users/${userId}`,
   addSubjectB: ({ userId }) => `auth/subjects/${userId}`,
   getSubects: ({ userId }) => `auth/subjects/${userId}`,
+  updateUser: ({ userId }) => `auth/${userId}`,
 };
 
 const userApi = {
@@ -18,6 +19,18 @@ const userApi = {
       return { response };
     } catch (err) {
       return err;
+    }
+  },
+
+  updateUser: async (userId, updatedUser) => {
+    try {
+      const response = await publicClient.put(
+        userEndpoints.updateUser({ userId }),
+        updatedUser
+      );
+      return { response };
+    } catch (err) {
+      return { err };
     }
   },
 

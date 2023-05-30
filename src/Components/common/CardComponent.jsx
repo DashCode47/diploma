@@ -2,21 +2,22 @@ import React, { useState } from "react";
 import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
-import Grid from "@mui/material/Grid";
+
 import CardContent from "@mui/material/CardContent";
 import Modal from "@mui/material/Modal";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
-import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
+import { CircularProgressbar } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 import { Stack } from "@mui/system";
 import { useNavigate } from "react-router-dom";
 import InfoIcon from "@mui/icons-material/Info";
 import { IconButton } from "@mui/material";
 import ContentCopyIcon from "@mui/icons-material/ContentCopy";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
+import subjectApi from "../../api/modules/subjects.api";
 
-const percentage = 0;
+/* const percentage = 0; */
 
 const style = {
   position: "absolute",
@@ -34,6 +35,12 @@ export default function CardComponent({ item }) {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+  const userId = localStorage.getItem("userId");
+  const [subjectAssist, setSubjectAssist] = useState(
+    item.assistances
+      .filter((subItem) => subItem.user.id == userId)
+      .map((subItem) => subItem.assistanceNum)
+  );
   const navigate = useNavigate();
   const goToDetails = (item) => {
     navigate("/DetailClass", { state: { item } });
@@ -101,8 +108,8 @@ export default function CardComponent({ item }) {
                 </IconButton>
                 <div style={{ width: 100, height: 100 }}>
                   <CircularProgressbar
-                    value={percentage}
-                    text={`${percentage}%`}
+                    value={subjectAssist * 5}
+                    text={`${subjectAssist * 5}%`}
                   />
                 </div>
                 <Stack justifyContent={"center"} alignItems={"center"}>
@@ -111,7 +118,7 @@ export default function CardComponent({ item }) {
                     justifyContent={"center"}
                     alignItems={"center"}
                   >
-                    <Typography variant="h5">0/</Typography>
+                    <Typography variant="h5">{subjectAssist || 0}/</Typography>
                     <Typography>20</Typography>
                   </Stack>
                   <Typography sx={{ mb: 1.5 }} color="text.secondary">

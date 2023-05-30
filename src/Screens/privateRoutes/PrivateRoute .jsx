@@ -1,8 +1,14 @@
+import { useEffect } from "react";
 import { Navigate } from "react-router-dom";
 
 const PrivateRoute = ({ component: Component, isAuthenticated }) => {
+  const tokenStorage = localStorage.getItem("accessToken");
+  useEffect(() => {
+    console.log("privateRoute", tokenStorage);
+  }, []);
+
   return (
-    <>{isAuthenticated ? <Component /> : <Navigate to={{ pathname: "/" }} />}</>
+    <>{tokenStorage ? <Component /> : <Navigate to={{ pathname: "/" }} />}</>
   );
 };
 

@@ -1,29 +1,21 @@
 import "react-dropzone-uploader/dist/styles.css";
-import Dropzone from "react-dropzone-uploader";
+import { useDropzone } from "react-dropzone";
+import React, { useCallback } from "react";
 
 const FilesTab = () => {
-  // specify upload params and url for your files
-  const getUploadParams = ({ meta }) => {
-    return { url: "https://httpbin.org/post" };
-  };
-
-  // called every time a file's `status` changes
-  const handleChangeStatus = ({ meta, file }, status) => {
-    console.log(status, meta, file);
-  };
-
-  // receives array of files that are done uploading when submit button is clicked
-  const handleSubmit = (files, allFiles) => {
-    console.log(files.map((f) => f.meta));
-    allFiles.forEach((f) => f.remove());
-  };
+  const onDrop = useCallback((acceptedFiles) => {
+    // Do something with the files
+  }, []);
+  const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
   return (
-    <Dropzone
-      getUploadParams={getUploadParams}
-      onChangeStatus={handleChangeStatus}
-      onSubmit={handleSubmit}
-      accept="image/*,audio/*,video/*"
-    />
+    <div {...getRootProps()}>
+      <input {...getInputProps()} />
+      {isDragActive ? (
+        <p>Drop the files here ...</p>
+      ) : (
+        <p>Drag 'n' drop some files here, or click to select files</p>
+      )}
+    </div>
   );
 };
 export default FilesTab;

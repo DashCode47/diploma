@@ -8,18 +8,33 @@ const userEndpoints = {
   addAssistance: ({ subjectId }) =>
     `/courses/${subjectId}/assistances/increaseListAssistanceNum`,
   getUserSubjects: ({ userId }) => `courses/user/${userId}`,
+  getSubjectById: ({ subjectId }) => `courses/${subjectId}`,
+  addNewPOst: ({ subjectId }) => `courses/${subjectId}/posts`,
 };
 
 const subjectApi = {
-  /* addSubject: async (data) => {
+  addNewPOst: async (subjectId, data) => {
     try {
-      const response = await publicClient.post(userEndpoints.addSubject, data);
+      const response = await publicClient.put(
+        userEndpoints.addNewPOst({ subjectId }),
+        data
+      );
       return { response };
     } catch (err) {
-      console.log("err");
       return { err };
     }
-  }, */
+  },
+
+  getSubjectById: async (subjectId) => {
+    try {
+      const response = await publicClient.get(
+        userEndpoints.getUserSubjects({ subjectId })
+      );
+      return { response };
+    } catch (err) {
+      return { err };
+    }
+  },
 
   getSubjects: async () => {
     try {

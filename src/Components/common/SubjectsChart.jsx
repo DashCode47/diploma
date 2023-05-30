@@ -6,13 +6,15 @@ import subjectApi from "../../api/modules/subjects.api";
 import { useNavigate } from "react-router-dom";
 const SubjectsChart = () => {
   const [subjects, setSubjects] = useState([]);
+  const [assistance, setAssistance] = useState();
   const navigate = useNavigate();
   const userId = localStorage.getItem("userId");
 
   const fetchSubjects = async () => {
     const { response, err } = await subjectApi.getUserSubjects(userId);
     if (response) {
-      setSubjects(response.map((item) => item.name));
+      setSubjects(response.map((item) => item));
+
       console.log(response);
     } else
       console.log({
@@ -72,7 +74,7 @@ const SubjectsChart = () => {
           paddingY: 3,
         }}
       >
-        {subjects.map((item, index) => (
+        {subjects.slice(0, 3).map((item, index) => (
           <Stack
             key={index}
             direction={"row"}
@@ -90,8 +92,13 @@ const SubjectsChart = () => {
                 sx={{ flex: 1, justifyContent: "space-between" }}
                 px={2}
               >
-                <Typography>{item}</Typography>
-                <Typography>40%</Typography>
+                <Typography>{item.name}</Typography>
+                <Typography>
+                  {item.assistances
+                    .filter((subItem) => subItem.user.id == userId)
+                    .map((subItem) => subItem.assistanceNum) * 5}
+                  %
+                </Typography>
               </Stack>
               <Box
                 sx={{
@@ -105,7 +112,9 @@ const SubjectsChart = () => {
                 <Box
                   sx={{
                     height: 10,
-                    width: "40%",
+                    width: `${item.assistances
+                      .filter((subItem) => subItem.user.id == userId)
+                      .map((subItem) => subItem.assistanceNum)}%`,
                     backgroundColor: "blue",
                     borderRadius: 5,
                     position: "absolute",

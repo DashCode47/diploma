@@ -1,5 +1,4 @@
 import {
-  Tabs,
   Box,
   Tab,
   Typography,
@@ -27,7 +26,7 @@ import FilesTab from "../../Components/common/FilesTab";
 
 const DetailClass = () => {
   const { state } = useLocation();
-  const { name, description, id } = state.item;
+  const { name, id } = state.item;
   const [value, setValue] = useState("1");
 
   const handleChange = (event, newValue) => {
@@ -35,7 +34,6 @@ const DetailClass = () => {
   };
 
   const [checked, setChecked] = useState([]);
-  const [ids, setIds] = useState([]);
 
   const handleToggle = (value) => () => {
     console.log(state.item);
@@ -90,7 +88,7 @@ const DetailClass = () => {
         </Box>
         <TabPanel value="1">
           <Container>
-            <PostTab />
+            <PostTab id={id} />
           </Container>
         </TabPanel>
 

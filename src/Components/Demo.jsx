@@ -13,47 +13,12 @@ import {
   Appointments,
   AppointmentTooltip,
   GroupingPanel,
-  DayView,
   WeekView,
   DragDropProvider,
   AppointmentForm,
 } from "@devexpress/dx-react-scheduler-material-ui";
-import { teal, indigo } from "@mui/material/colors";
-
-const appointments = [
-  {
-    id: 0,
-    title: "Watercolor Landscape",
-    members: [1, 2],
-    roomId: 1,
-    startDate: new Date(2017, 4, 28, 9, 30),
-    endDate: new Date(2017, 4, 28, 12, 0),
-  },
-  {
-    id: 1,
-    title: "Oil Painting for Beginners",
-    members: [1],
-    roomId: 2,
-    startDate: new Date(2017, 4, 28, 12, 30),
-    endDate: new Date(2017, 4, 28, 14, 30),
-  },
-  {
-    id: 2,
-    title: "Testing",
-    members: [1, 2],
-    roomId: 1,
-    startDate: new Date(2017, 4, 29, 12, 30),
-    endDate: new Date(2017, 4, 29, 14, 30),
-  },
-  {
-    id: 3,
-    title: "Final exams",
-    members: [1, 2],
-    roomId: 2,
-    startDate: new Date(2017, 4, 29, 9, 30),
-    endDate: new Date(2017, 4, 29, 12, 0),
-  },
-];
+import { indigo } from "@mui/material/colors";
+import { useEffect } from "react";
 
 const owners = [
   {
@@ -66,7 +31,8 @@ const owners = [
 const locations = [{ text: "Room 1", id: 1 }];
 
 const Demo = () => {
-  const [data, setData] = useState(appointments);
+  const localSchedule = localStorage.getItem("horario");
+  const [data, setData] = useState();
   const [resources, setResources] = useState([
     {
       fieldName: "members",
@@ -80,6 +46,7 @@ const Demo = () => {
       instances: locations,
     },
   ]);
+
   const [grouping, setGrouping] = useState([
     {
       resourceName: "roomId",
@@ -88,6 +55,49 @@ const Demo = () => {
       resourceName: "members",
     },
   ]);
+
+  useEffect(() => {
+    const schedule = localStorage.getItem("horario");
+    if (schedule) {
+      setData(localStorage.getItem("horario"));
+      console.log(schedule);
+    } else {
+      setData([
+        {
+          id: 0,
+          title: "Watercolor Landscape",
+          members: [1, 2],
+          roomId: 1,
+          startDate: new Date(2017, 4, 28, 9, 30),
+          endDate: new Date(2017, 4, 28, 12, 0),
+        },
+        {
+          id: 1,
+          title: "Oil Painting for Beginners",
+          members: [1],
+          roomId: 2,
+          startDate: new Date(2017, 4, 28, 12, 30),
+          endDate: new Date(2017, 4, 28, 14, 30),
+        },
+        {
+          id: 2,
+          title: "Testing",
+          members: [1, 2],
+          roomId: 1,
+          startDate: new Date(2017, 4, 29, 12, 30),
+          endDate: new Date(2017, 4, 29, 14, 30),
+        },
+        {
+          id: 3,
+          title: "Final exams",
+          members: [1, 2],
+          roomId: 2,
+          startDate: new Date(2017, 4, 29, 9, 30),
+          endDate: new Date(2017, 4, 29, 12, 0),
+        },
+      ]);
+    }
+  }, []);
 
   const commitChanges = ({ added, changed, deleted }) => {
     setData((prevData) => {
@@ -107,6 +117,7 @@ const Demo = () => {
       if (deleted !== undefined) {
         newData = newData.filter((appointment) => appointment.id !== deleted);
       }
+      localStorage.setItem("horario", data);
       return newData;
     });
     console.log(data);

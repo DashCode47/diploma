@@ -2,7 +2,6 @@ import {
   Box,
   Typography,
   Grid,
-  Container,
   Modal,
   Button,
   Stack,
@@ -12,7 +11,6 @@ import React, { useEffect } from "react";
 import ImportantNotes from "../Components/common/ImportantNotes";
 import NavBar from "../Components/common/NavBar";
 import PointsChart from "../Components/common/PointsChart";
-import Schedule from "../Components/common/Schedule";
 import SubjectsChart from "../Components/common/SubjectsChart";
 import Demo from "../Components/Demo";
 import subjectApi from "../api/modules/subjects.api";
@@ -45,7 +43,7 @@ const HomeScreen = () => {
     const { response, err } = await subjectApi.getUserSubjects(userId);
     if (response) {
       setFetch(response);
-      setLoading(true);
+      setLoading(false);
       console.log(response);
     } else
       console.log({
@@ -73,8 +71,8 @@ const HomeScreen = () => {
       }}
     >
       <NavBar />
-      {/* LEFT SIDE */}
-      {!loading && (
+
+      {!loading && fetch.length < 1 && (
         <Stack
           direction={"column"}
           sx={{ flex: 1, justifyContent: "center", alignItems: "center" }}
@@ -95,6 +93,7 @@ const HomeScreen = () => {
           ></lottie-player>
         </Stack>
       )}
+      {/* LEFT SIDE */}
       {fetch.length > 0 && (
         <Grid container spacing={2}>
           <Grid container item md={6} xs={12} direction={"column"}>

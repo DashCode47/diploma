@@ -6,6 +6,14 @@ import userApi from "../../api/modules/users.api";
 import { Button, Grid, TextField } from "@mui/material";
 
 const AddSubjectModal = (props) => {
+  const userId = localStorage.getItem("userId");
+
+  const joinSubject = async (code) => {
+    const { response, err } = await subjectApi.addUserToSubject(code, userId);
+    if (response) {
+    } else console.log({ err });
+  };
+
   /* SUBMITTING FUNCTION */
   const formik = useFormik({
     initialValues: {
@@ -18,12 +26,15 @@ const AddSubjectModal = (props) => {
         name: values.name,
         description: values.teacher,
       };
-      const userId = localStorage.getItem("userId");
-      /* const { response, err } = await subjectApi.addSubject(data); */
+
       const { response, err } = await userApi.addSubjectB(userId, data);
 
       if (response) {
-        console.log(response);
+        const code = response.subjects
+          .filter((item) => item.name == values.name)
+          .map((item) => item.id);
+
+        joinSubject(code);
         setSubmitting(false);
         props.onSucces();
         formik.values.name = "";
@@ -48,6 +59,7 @@ const AddSubjectModal = (props) => {
                   label="name"
                   variant="outlined"
                   name="name"
+                  size="small"
                   value={formik.values.name}
                   onChange={formik.handleChange}
                   sx={{ width: "100%" }}
@@ -58,6 +70,7 @@ const AddSubjectModal = (props) => {
                 <TextField
                   id="outlined-basic"
                   label="teacher"
+                  size="small"
                   value={formik.values.teacher}
                   variant="outlined"
                   name="teacher"
@@ -66,14 +79,17 @@ const AddSubjectModal = (props) => {
                 />
               </Grid>
 
-              <Button
-                variant="contained"
-                color="success"
-                type="submit"
-                disabled={isSubmitting}
-              >
-                Success
-              </Button>
+              <Grid item>
+                <Button
+                  variant="contained"
+                  color="success"
+                  type="submit"
+                  size="small"
+                  disabled={isSubmitting}
+                >
+                  Success
+                </Button>
+              </Grid>
             </Grid>
           </form>
         )}

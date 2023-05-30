@@ -43,7 +43,7 @@ const PointsChart = () => {
     labels: subjects,
     datasets: [
       {
-        label: "# of Votes",
+        label: "Assistance",
         options: {
           maintainAspectRatio: false,
         },

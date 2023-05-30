@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Box, Typography, Grid, IconButton, Modal } from "@mui/material";
+import { Box, Grid, IconButton, Modal } from "@mui/material";
 import NavBar from "../Components/common/NavBar";
 import CardComponent from "../Components/common/CardComponent";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
@@ -40,7 +40,6 @@ const MyClasses = () => {
     const getList = async () => {
       const { response, err } = await subjectApi.getUserSubjects(userId);
       if (response) {
-        console.log(response);
         setData(response);
       } else
         console.log({
@@ -48,7 +47,7 @@ const MyClasses = () => {
         });
     };
     getList();
-  }, []);
+  }, [handleCloseJoin]);
 
   return (
     <Box sx={{ display: "flex", marginTop: 10 }}>

@@ -16,8 +16,6 @@ import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
-import InboxIcon from "@mui/icons-material/MoveToInbox";
-import MailIcon from "@mui/icons-material/Mail";
 import { useNavigate } from "react-router-dom";
 import { Stack } from "@mui/material";
 import HomeIcon from "@mui/icons-material/Home";
@@ -197,7 +195,11 @@ export default function NavBar() {
             alignItems={"center"}
             justifyContent={"center"}
           >
-            <img src={require("../../Assets/logoDraw.png")} height={50} />
+            <img
+              src={require("../../Assets/logoDraw.png")}
+              height={50}
+              alt="logo"
+            />
             <Typography component={"h4"} variant="h6" sx={{ paddingLeft: 3 }}>
               КФУ
             </Typography>
