@@ -44,6 +44,7 @@ const ImportantNotes = () => {
             borderRadius: 5,
             height: "auto",
             position: "relative",
+            marginBottom: 1,
           }}
         >
           {item.posts[0] && index < 2 && (

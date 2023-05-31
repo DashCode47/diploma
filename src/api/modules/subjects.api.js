@@ -1,4 +1,5 @@
 import publicClient from "../publicClient";
+import uploadClient from "../uploadClient";
 
 const userEndpoints = {
   /* addSubject: "courses", */
@@ -10,9 +11,39 @@ const userEndpoints = {
   getUserSubjects: ({ userId }) => `courses/user/${userId}`,
   getSubjectById: ({ subjectId }) => `courses/${subjectId}`,
   addNewPOst: ({ subjectId }) => `courses/${subjectId}/posts`,
+  uploadFile: "courses/upload",
+  getFiles: "courses/files",
+  dowloadFile: ({ fileName }) => `courses/download/${fileName}`,
 };
 
 const subjectApi = {
+  dowloadFile: async (fileName) => {
+    try {
+      const response = await publicClient.get(
+        userEndpoints.dowloadFile({ fileName })
+      );
+      return { response };
+    } catch (err) {
+      return { err };
+    }
+  },
+  getFiles: async () => {
+    try {
+      const response = await publicClient.get(userEndpoints.getFiles);
+      return { response };
+    } catch (err) {
+      return { err };
+    }
+  },
+  uploadFile: async (data) => {
+    try {
+      const response = await uploadClient.post(userEndpoints.uploadFile, data);
+      return { response };
+    } catch (err) {
+      return { err };
+    }
+  },
+
   addNewPOst: async (subjectId, data) => {
     try {
       const response = await publicClient.put(

@@ -3,7 +3,7 @@ import queryString from "query-string";
 
 const baseURL = "http://localhost:8005/api/";
 
-const publicClient = axios.create({
+const uploadClient = axios.create({
   baseURL,
   paramsSerializer: {
     encode: (params) => queryString.stringify(params),
@@ -13,17 +13,16 @@ const publicClient = axios.create({
   },
 });
 
-publicClient.interceptors.request.use(async (config) => {
+uploadClient.interceptors.request.use(async (config) => {
   return {
     ...config,
     headers: {
-      "Content-Type": "application/json",
       Accept: "application/json",
     },
   };
 });
 
-publicClient.interceptors.response.use(
+uploadClient.interceptors.response.use(
   (response) => {
     if (response && response.data) return response.data;
     return response;
@@ -33,4 +32,4 @@ publicClient.interceptors.response.use(
   }
 );
 
-export default publicClient;
+export default uploadClient;

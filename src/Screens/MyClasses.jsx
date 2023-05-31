@@ -30,7 +30,10 @@ const MyClasses = () => {
   const handleCloseJoin = () => setOpenJoin(false);
   const [data, setData] = useState([]);
   const userId = localStorage.getItem("userId");
+  const [refresh, setRefresh] = useState(false);
+
   const onSucces = () => {
+    setRefresh(true);
     toast.success("subject added", {
       position: "bottom-left",
     });
@@ -47,7 +50,7 @@ const MyClasses = () => {
         });
     };
     getList();
-  }, [handleCloseJoin]);
+  }, [refresh]);
 
   return (
     <Box sx={{ display: "flex", marginTop: 10 }}>

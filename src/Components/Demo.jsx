@@ -59,7 +59,16 @@ const Demo = () => {
   useEffect(() => {
     const schedule = localStorage.getItem("horario");
     if (schedule) {
-      setData(localStorage.getItem("horario"));
+      setData([
+        {
+          id: 0,
+          title: "Watercolor Landscape",
+          members: [1, 2],
+          roomId: 1,
+          startDate: new Date(2017, 4, 28, 9, 30),
+          endDate: new Date(2017, 4, 28, 12, 0),
+        },
+      ]);
       console.log(schedule);
     } else {
       setData([
