@@ -7,6 +7,7 @@ import axios from "axios";
 import subjectApi from "../../api/modules/subjects.api";
 import PropTypes from "prop-types";
 import LinearProgress from "@mui/material/LinearProgress";
+import CircularProgress from "@mui/material/CircularProgress";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import { toast } from "react-toastify";
@@ -33,20 +34,18 @@ function LinearProgressWithLabel(props) {
 const FilesTab = () => {
   const [progress, setProgress] = useState(0);
   const [files, setFiles] = useState();
+  const [loading, setLoading] = useState(true);
   const [fileUploaded, setFileUploaded] = useState({
     fileName: "",
     percentCompleted: 0,
   });
   const [uploadProgress, setUploadProgress] = useState(0);
 
-  const handleDownload = async (fileName) => {
-    const { response, err } = await subjectApi.dowloadFile(fileName);
-    if (response) {
-      const blob = new Blob([response.data]);
-      saveAs(blob, fileName);
-    } else {
-      console.log("Error downloading", err);
-    }
+  const handleDownload = (fileName) => {
+    const downloadLink = document.createElement("a");
+    downloadLink.href = `${subjectApi.dowloadFile(fileName)}`;
+    downloadLink.download = fileName;
+    downloadLink.click();
   };
 
   const onDrop = async (acceptedFiles) => {
@@ -88,6 +87,7 @@ const FilesTab = () => {
 
   useEffect(() => {
     const getList = async () => {
+      setLoading(true);
       const { response, err } = await subjectApi.getFiles();
       if (response) {
         setFiles(response);
@@ -96,6 +96,7 @@ const FilesTab = () => {
         console.log({
           err,
         });
+      setLoading(false);
     };
     getList();
   }, []);
@@ -130,16 +131,30 @@ const FilesTab = () => {
         )}
       </Dropzone>
       {uploadProgress > 0 && <LinearProgressWithLabel value={progress} />}
-      <Stack direction={"column"}>
-        {files &&
-          files.map((item) => (
-            <div>
-              <span style={{ fontWeight: "bold" }}>•</span>{" "}
-              {/* Bold bullet point */}
-              <Button onClick={() => handleDownload(item)}>{item}</Button>
-            </div>
-          ))}
-      </Stack>
+      {loading ? (
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            height: 400,
+          }}
+        >
+          <CircularProgress />
+        </Box>
+      ) : (
+        <Stack direction={"column"}>
+          <Stack direction={"column"}>
+            {files &&
+              files.map((item) => (
+                <div key={item}>
+                  <span style={{ fontWeight: "bold" }}>•</span>
+                  <Button onClick={() => handleDownload(item)}>{item}</Button>
+                </div>
+              ))}
+          </Stack>
+        </Stack>
+      )}
     </div>
   );
 };

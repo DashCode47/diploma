@@ -97,11 +97,11 @@ const HomeScreen = () => {
       {fetch.length > 0 && (
         <Grid container spacing={2}>
           <Grid container item md={6} xs={12} direction={"column"}>
-            <Grid item md={7}>
+            <Grid item md={6}>
               <PointsChart />
             </Grid>
             <Grid item md={5}>
-              <ImportantNotes />
+              <ImportantNotes open={open} />
             </Grid>
           </Grid>
 

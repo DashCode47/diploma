@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Box, Grid, IconButton, Modal } from "@mui/material";
+import { Box, Grid, IconButton, Modal, CircularProgress } from "@mui/material";
 import NavBar from "../Components/common/NavBar";
 import CardComponent from "../Components/common/CardComponent";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
@@ -8,6 +8,7 @@ import { ToastContainer, toast } from "react-toastify";
 import GroupAddIcon from "@mui/icons-material/GroupAdd";
 import subjectApi from "../api/modules/subjects.api";
 import JoinSubjectModal from "../Components/common/JoinSubjectModal";
+import { TextField } from "@mui/material";
 
 const style = {
   position: "absolute",
@@ -31,6 +32,8 @@ const MyClasses = () => {
   const [data, setData] = useState([]);
   const userId = localStorage.getItem("userId");
   const [refresh, setRefresh] = useState(false);
+  const [filter, setFilter] = useState("");
+  const [loading, setLoading] = useState(true);
 
   const onSucces = () => {
     setRefresh(true);
@@ -39,15 +42,27 @@ const MyClasses = () => {
     });
   };
 
+  const handleFilterChange = (event) => {
+    setFilter(event.target.value);
+  };
+
+  const filteredData = data.filter((item) => {
+    const subjectName = item?.name || ""; // Set a default value if subjectName is undefined
+    return subjectName.toLowerCase().includes(filter.toLowerCase());
+  });
+
   useEffect(() => {
     const getList = async () => {
+      setLoading(true);
       const { response, err } = await subjectApi.getUserSubjects(userId);
       if (response) {
         setData(response);
-      } else
+      } else {
         console.log({
           err,
         });
+      }
+      setLoading(false);
     };
     getList();
   }, [refresh]);
@@ -82,13 +97,44 @@ const MyClasses = () => {
       </Modal>
 
       <Box component={"main"} sx={{ flexGrow: 1, p: 3 }}>
-        <Grid container spacing={2}>
-          {data.map((item, index) => (
-            <Grid item xs={6} md={3} key={index}>
-              <CardComponent item={item} />
+        {loading ? ( // Render the loading indicator if loading is true
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              height: 400,
+            }}
+          >
+            <CircularProgress />
+          </Box>
+        ) : (
+          <>
+            <Box
+              sx={{
+                display: "flex",
+                justifyContent: "center",
+                marginBottom: 5,
+              }}
+            >
+              <TextField
+                type="text"
+                placeholder="Filter by subject name"
+                value={filter}
+                onChange={handleFilterChange}
+                variant="outlined"
+                sx={{ width: 300 }}
+              />
+            </Box>
+            <Grid container spacing={2}>
+              {filteredData.map((item, index) => (
+                <Grid item xs={6} md={3} key={index}>
+                  <CardComponent item={item} />
+                </Grid>
+              ))}
             </Grid>
-          ))}
-        </Grid>
+          </>
+        )}
         <IconButton
           sx={{ position: "absolute", bottom: 10, right: 10 }}
           onClick={handleOpen}

@@ -2,7 +2,8 @@ import React, { useState, useEffect } from "react";
 import subjectApi from "../../api/modules/subjects.api";
 import parse from "html-react-parser";
 import { Box, Typography } from "@mui/material";
-const ImportantNotes = () => {
+
+const ImportantNotes = ({ open }) => {
   const [subjects, setSubjects] = useState([]);
   const userId = localStorage.getItem("userId");
 
@@ -25,6 +26,7 @@ const ImportantNotes = () => {
   useEffect(() => {
     fetchSubjects();
   }, []);
+
   return (
     <Box
       sx={{
@@ -32,6 +34,7 @@ const ImportantNotes = () => {
         borderRadius: 5,
         height: "100%",
         padding: 3,
+        width: "95%",
       }}
     >
       <Typography sx={{ color: "blue", fontWeight: "bold" }}>

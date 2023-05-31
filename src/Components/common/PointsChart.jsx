@@ -78,6 +78,7 @@ const PointsChart = () => {
         height: "95%",
         backgroundColor: "white",
         borderRadius: 5,
+        width: "95%",
       }}
     >
       <Doughnut
